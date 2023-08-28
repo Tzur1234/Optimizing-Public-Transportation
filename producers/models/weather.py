@@ -80,9 +80,12 @@ class Weather(Producer):
 
         resp = requests.post(
                     f"{Weather.rest_proxy_url}/topics/weather", # URL to post to
-                    headers={"Content-Type":"application/vnd.kafka.avro.v2+json"},  # Set the header
+                    headers={"Content-Type":"application/vnd.kafka.avro.v2+json"},  # Set the header (Avro format)
                     data=json.dumps(data),
                     )
+        
+        # Note: the data sent to Rest Proxy in Json format.
+        # From Rest Proxy the data is sent to Kafka in Avro format
         
         try:
             resp.raise_for_status()
